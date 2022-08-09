@@ -85,7 +85,7 @@ public class Swagger2Config {
                 .title("网站-API文档")
                 .description("本文档描述了网站微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("dyp", "http://dyp.com", "512111559@qq.com"))
+                .contact(new Contact("dyp", "http://dyp.com", "13643120414@163.com"))
                 .build();
     }
 
@@ -95,7 +95,7 @@ public class Swagger2Config {
                 .title("后台管理系统-API文档")
                 .description("本文档描述了后台管理系统微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("dyp", "http://dyp.com", "512111559@qq.com"))
+                .contact(new Contact("dyp", "http://dyp.com", "13643120414@163.com"))
                 .build();
     }
 

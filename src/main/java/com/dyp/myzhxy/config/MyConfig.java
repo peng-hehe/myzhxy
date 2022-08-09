@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
  */
 
 @Configuration
-@MapperScan("com.atguigu.zhxy.mapper")
+@MapperScan("com.dyp.myzhxy.mapper")
 public class MyConfig {
 
     /**
