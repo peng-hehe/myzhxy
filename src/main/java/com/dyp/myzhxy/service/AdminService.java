@@ -2,6 +2,7 @@ package com.dyp.myzhxy.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dyp.myzhxy.pojo.Admin;
+import com.dyp.myzhxy.pojo.LoginForm;
 
 /**
  * @param
@@ -12,4 +13,7 @@ import com.dyp.myzhxy.pojo.Admin;
  * @date:
  */
 public interface AdminService extends IService<Admin> {
+    Admin login(LoginForm loginForm);
+
+    Admin getAdminById(Long userId);
 }
