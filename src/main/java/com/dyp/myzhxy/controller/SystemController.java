@@ -12,6 +12,9 @@ import com.dyp.myzhxy.util.CreateVerifiCodeImage;
 import com.dyp.myzhxy.util.JwtHelper;
 import com.dyp.myzhxy.util.Result;
 import com.dyp.myzhxy.util.ResultCodeEnum;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +27,7 @@ import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
+@Api(tags = "系统控制器")
 @RestController
 @RequestMapping("/sms/system")
 public class SystemController {
@@ -40,8 +43,9 @@ public class SystemController {
 
 
 
+    @ApiOperation("通过token口令获取当前登录的用户信息的方法")
     @GetMapping("/getInfo")
-    public Result getInfoByToken(@RequestHeader("token") String token){
+    public Result getInfoByToken(@ApiParam("token口令")@RequestHeader("token") String token){
 
         boolean expiration = JwtHelper.isExpiration(token);
         if (expiration) {
@@ -76,10 +80,9 @@ public class SystemController {
     }
 
 
-
-
+    @ApiOperation("登录的方法")
     @PostMapping("/login")
-    public Result login(@RequestBody LoginForm loginForm,HttpServletRequest request){
+    public Result login(@ApiParam("登录提交信息的form表单")@RequestBody LoginForm loginForm,HttpServletRequest request){
 
         HttpSession session = request.getSession();
         String sessionVerifiCode = (String) session.getAttribute("verifiCode");
@@ -117,7 +120,7 @@ public class SystemController {
                     Student student= studentService.login(loginForm);
                     if (null != student) {
                         // 用户的类型和用户id转换成一个密文,以token的名称向客户端反馈
-                        map.put("token", JwtHelper.createToken(student.getId().longValue(), 1));
+                        map.put("token", JwtHelper.createToken(student.getId().longValue(), 2));
                     }else{
                         throw new RuntimeException("用户名或者密码有误");
                     }
@@ -131,7 +134,7 @@ public class SystemController {
                     Teacher teacher= teacherService.login(loginForm);
                     if (null != teacher) {
                         // 用户的类型和用户id转换成一个密文,以token的名称向客户端反馈
-                        map.put("token", JwtHelper.createToken(teacher.getId().longValue(), 1));
+                        map.put("token", JwtHelper.createToken(teacher.getId().longValue(), 3));
                     }else{
                         throw new RuntimeException("用户名或者密码有误");
                     }
@@ -144,6 +147,7 @@ public class SystemController {
         return Result.fail().message("查无此用户");
     }
 
+    @ApiOperation("获取验证码图片")
     @RequestMapping("/getVerifiCodeImage")
     public void getVerifiCodeImage (HttpServletRequest request, HttpServletResponse response){
         //获取图片

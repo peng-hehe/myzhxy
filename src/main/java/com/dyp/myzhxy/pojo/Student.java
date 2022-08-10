@@ -22,8 +22,8 @@ public class Student {
     private String email;
     private String telephone;
     private String address;
-    private String introducation;
-    private String portraitPath;//存储头像的项目路径
+    private String introduction;
+    private String portraitPath;//存储头像的项目路径portrait_path
     private String clazzName;//班级名称
 
 }
